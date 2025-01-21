@@ -1,7 +1,7 @@
 import React from "react";
 
-const MainFunction = () => {
-  return <div>MainFunction</div>;
+const LoginScreen = () => {
+  return <div className="text-cyan-300">LoginScreen</div>;
 };
 
-export default MainFunction;
+export default LoginScreen;
