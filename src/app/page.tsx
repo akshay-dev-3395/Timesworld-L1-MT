@@ -1,5 +1,4 @@
 import LoginForm from "@/components/LoginScreenComponent/LoginForm";
-import Image from "next/image";
 import React from "react";
 
 const LoginScreen = () => {
@@ -9,7 +8,13 @@ const LoginScreen = () => {
         <LoginForm />
       </div>
       <div className="hidden lg:flex flex-1 justify-center items-center">
-        <img src="/login.png" alt="login image" className="h-3/5" />
+        <div className="h-[70%] w-[60%] bg-blue-400">
+          <img
+            src="/images/login.png"
+            alt="login image"
+            className="h-full w-full object-cover"
+          />
+        </div>
       </div>
     </div>
   );

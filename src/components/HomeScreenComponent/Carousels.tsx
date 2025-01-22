@@ -24,15 +24,15 @@ const Pagination = () => {
 
 const Carousels = (props: Props) => {
   return (
-    <div className="flex-1 lg:gap-5 gap-3 flex flex-col lg:mt-20 mt-10 lg:flex-row-reverse">
-      <div className="h-1/4 lg:w-1/4 lg:h-4/5 ">
+    <div className="h-[60%]  lg:gap-5 gap-3 flex flex-col lg:mt-10 mt-10 lg:flex-row-reverse">
+      <div className="h-[40%] lg:w-1/4 lg:h-full ">
         <img
-          src={IMAGES[1].url}
+          src={"/images/img7.jpg"}
           alt="first image"
-          className="w-full h-full object-cover"
+          className="w-full h-full object-cover "
         />
       </div>
-      <div className="h-2/6 bg-blue-500 lg:w-3/4 lg:h-4/5 relative">
+      <div className="h-[60%]  lg:w-3/4 lg:h-full relative">
         <Carousel
           slide={false}
           controls={false}

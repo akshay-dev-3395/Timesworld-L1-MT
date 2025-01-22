@@ -1,5 +1,6 @@
 "use client";
 
+import { cn } from "@/hooks/utils";
 import React from "react";
 import Button from "react-bootstrap/Button";
 
@@ -20,10 +21,10 @@ const ButtonComponent = (props: Props) => {
     variant = "primary",
   } = props;
   return (
-    <div className={`${containerStyle}`}>
+    <div className={cn(containerStyle)}>
       <Button
         variant={variant}
-        className={`${buttonStyle} w-full h-14 rounded`}
+        className={cn(`w-full h-14 rounded`, buttonStyle)}
       >
         {label}
       </Button>
