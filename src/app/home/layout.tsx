@@ -1,3 +1,5 @@
+import Footer from "@/components/HomeScreenComponent/Footer";
+import NavBarSection from "@/components/HomeScreenComponent/NavBarSection";
 import React from "react";
 
 type Props = {
@@ -6,7 +8,13 @@ type Props = {
 
 const Layout = (props: Props) => {
   const { children } = props;
-  return <div>{children}</div>;
+  return (
+    <div className="lg:px-24 lg:py-10 p-10">
+      <NavBarSection />
+      {children}
+      <Footer />
+    </div>
+  );
 };
 
 export default Layout;
