@@ -23,6 +23,14 @@ const eslintConfig = [
           argsIgnorePattern: "^_",
         },
       ],
+      "@typescript-eslint/no-empty-interface": [
+        "warn",
+        {
+          allowSingleExtends: true,
+          allowObjectTypes: true,
+        },
+      ],
+      "@typescript-eslint/no-explicit-any": "off",
     },
   },
 ];
