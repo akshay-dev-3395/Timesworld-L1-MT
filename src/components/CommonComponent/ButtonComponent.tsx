@@ -25,6 +25,7 @@ const ButtonComponent = (props: Props) => {
       <Button
         variant={variant}
         className={cn(`w-full h-14 rounded`, buttonStyle)}
+        onClick={onPress}
       >
         {label}
       </Button>
