@@ -28,7 +28,8 @@ export const getAxiosInstance = async () => {
           resolve(response);
         }),
       async (error) => {
-        if (error.response) {
+        // console.log("ERROR=API===", error);
+        if (error) {
           return new Promise((resolve, reject) => {
             reject(error);
           });

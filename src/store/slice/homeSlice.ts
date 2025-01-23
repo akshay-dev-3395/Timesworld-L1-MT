@@ -30,9 +30,11 @@ export const homeSlice = createSlice({
   extraReducers: (builder) => {
     builder.addCase(fetchAllCountryApi.pending, (state, action) => {});
     builder.addCase(fetchAllCountryApi.fulfilled, (state, action) => {
-      state.countryData = action.payload.data;
+      state.countryData = action?.payload?.data;
     });
-    builder.addCase(fetchAllCountryApi.rejected, (state, action) => {});
+    builder.addCase(fetchAllCountryApi.rejected, (state, action) => {
+      state.countryData = [];
+    });
   },
 });
 

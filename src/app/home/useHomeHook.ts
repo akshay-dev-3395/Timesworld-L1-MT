@@ -12,17 +12,17 @@ const useHomeHook = () => {
 
   const countryList = useMemo(() => {
     if (filterCountry === "all") {
-      const displayedCountries = countryData.slice(
+      const displayedCountries = countryData?.slice(
         0,
         currentIndex + itemsPerPage
       );
       return displayedCountries;
     }
     if (filterCountry === "Asia") {
-      const filterData = countryData.filter(
+      const filterData = countryData?.filter(
         (item: any) => item?.region == filterCountry
       );
-      const displayedCountries = filterData.slice(
+      const displayedCountries = filterData?.slice(
         0,
         currentIndex + itemsPerPage
       );
@@ -30,10 +30,10 @@ const useHomeHook = () => {
       return displayedCountries;
     }
     if (filterCountry === "Europe") {
-      const filterData = countryData.filter(
+      const filterData = countryData?.filter(
         (item: any) => item?.region == filterCountry
       );
-      const displayedCountries = filterData.slice(
+      const displayedCountries = filterData?.slice(
         0,
         currentIndex + itemsPerPage
       );
@@ -42,7 +42,7 @@ const useHomeHook = () => {
     }
   }, [currentIndex, countryData, filterCountry]);
 
-  console.log("countryData====", countryList);
+  // console.log("countryData====", countryList);
 
   const onPressLoadMore = useCallback(() => {
     setCurrentIndex((prev) => prev + itemsPerPage);
@@ -66,7 +66,7 @@ const useHomeHook = () => {
       setIsLoading(false);
     } else {
       console.log("RESULT==ERROR==");
-      setIsLoading(true);
+      setIsLoading(false);
     }
   };
 

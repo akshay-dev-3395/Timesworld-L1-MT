@@ -22,10 +22,10 @@ const CountryList = (props: Props) => {
 
   const isVisibleButton = useMemo(() => {
     if (filterCountry === "all") {
-      return Boolean(countryData.length === countryList.length);
+      return Boolean(countryData?.length === countryList?.length);
     }
 
-    const newArray = countryData.filter(
+    const newArray = countryData?.filter(
       (item: any) => item?.region == filterCountry
     );
 
@@ -65,10 +65,23 @@ const CountryList = (props: Props) => {
     );
   }
 
+  if (countryData?.length === 0 && !isLoading) {
+    return (
+      <div className=" flex items-center justify-center  flex-col">
+        <img
+          src={"/images/no-data-found.png"}
+          className="h-96 w-96 object-cover rounded"
+          alt={`image-nodata`}
+        />
+        <h2 className="m-0 p-0">No data found</h2>
+      </div>
+    );
+  }
+
   return (
     <div className="my-5">
       <div className="grid grid-cols-1 lg:grid-cols-2 gap-2">
-        {countryList.map((item, index) => (
+        {countryList?.map((item, index) => (
           <motion.div
             animate={{ opacity: 1, y: 0 }}
             initial={{ opacity: 0, y: -50 }}
