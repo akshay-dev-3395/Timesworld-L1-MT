@@ -11,6 +11,8 @@ const rootReducer = (state: any, action: any) => {
 
 export const store: any = configureStore({
   reducer: rootReducer,
+  middleware: (getDefaultMiddleware) =>
+    getDefaultMiddleware({ serializableCheck: false }),
 });
 
 export type AppStore = ReturnType<typeof store>;

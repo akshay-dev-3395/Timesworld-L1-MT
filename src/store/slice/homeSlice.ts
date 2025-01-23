@@ -16,9 +16,9 @@ export const fetchAllCountryApi = createAsyncThunk(
     try {
       const response = await api.get("all", { params });
 
-      return response?.data;
+      return response;
     } catch (error: any) {
-      return rejectWithValue(error?.response?.data);
+      return rejectWithValue(error?.response);
     }
   }
 );
@@ -29,7 +29,9 @@ export const homeSlice = createSlice({
   reducers: {},
   extraReducers: (builder) => {
     builder.addCase(fetchAllCountryApi.pending, (state, action) => {});
-    builder.addCase(fetchAllCountryApi.fulfilled, (state, action) => {});
+    builder.addCase(fetchAllCountryApi.fulfilled, (state, action) => {
+      state.countryData = action.payload.data;
+    });
     builder.addCase(fetchAllCountryApi.rejected, (state, action) => {});
   },
 });
