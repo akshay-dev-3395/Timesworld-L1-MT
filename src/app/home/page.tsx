@@ -9,16 +9,26 @@ import React from "react";
 import useHomeHook from "./useHomeHook";
 
 const HomeScreen = () => {
-  const [onPressLoadMore, isLoading, countryList] = useHomeHook();
+  const [
+    onPressLoadMore,
+    isLoading,
+    countryList,
+    onPressNavLink,
+    filterCountry,
+  ] = useHomeHook();
   return (
     <div className="h-screen flex flex-col">
-      <NavBarSection />
+      <NavBarSection
+        onPressNavLink={onPressNavLink}
+        filterCountry={filterCountry}
+      />
       <WelcomeTitle />
       <Carousels />
       <CountryList
         onPressLoadMore={onPressLoadMore}
         countryList={countryList}
         isLoading={isLoading}
+        filterCountry={filterCountry}
       />
       <Footer />
     </div>

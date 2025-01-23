@@ -7,22 +7,53 @@ const useHomeHook = () => {
   const { countryData } = useAppSelector((state) => state.homeReducer);
   const [currentIndex, setCurrentIndex] = useState(0);
   const [isLoading, setIsLoading] = useState(true);
+  const [filterCountry, setFilterCountry] = useState("all");
   const itemsPerPage = 10;
 
   const countryList = useMemo(() => {
-    const displayedCountries = countryData.slice(
-      0,
-      currentIndex + itemsPerPage
-    );
+    if (filterCountry === "all") {
+      const displayedCountries = countryData.slice(
+        0,
+        currentIndex + itemsPerPage
+      );
+      return displayedCountries;
+    }
+    if (filterCountry === "Asia") {
+      const filterData = countryData.filter(
+        (item: any) => item?.region == filterCountry
+      );
+      const displayedCountries = filterData.slice(
+        0,
+        currentIndex + itemsPerPage
+      );
 
-    return displayedCountries;
-  }, [currentIndex, countryData]);
+      return displayedCountries;
+    }
+    if (filterCountry === "Europe") {
+      const filterData = countryData.filter(
+        (item: any) => item?.region == filterCountry
+      );
+      const displayedCountries = filterData.slice(
+        0,
+        currentIndex + itemsPerPage
+      );
+
+      return displayedCountries;
+    }
+  }, [currentIndex, countryData, filterCountry]);
 
   console.log("countryData====", countryList);
 
   const onPressLoadMore = useCallback(() => {
     setCurrentIndex((prev) => prev + itemsPerPage);
   }, [currentIndex]);
+
+  const onPressNavLink = useCallback(
+    (type: string) => {
+      setFilterCountry(type);
+    },
+    [filterCountry]
+  );
 
   const fetchCountryFunction = async () => {
     setIsLoading(true);
@@ -43,7 +74,13 @@ const useHomeHook = () => {
     fetchCountryFunction();
   }, []);
 
-  return [onPressLoadMore, isLoading, countryList];
+  return [
+    onPressLoadMore,
+    isLoading,
+    countryList,
+    onPressNavLink,
+    filterCountry,
+  ];
 };
 
 export default useHomeHook;

@@ -1,6 +1,6 @@
 "use client";
 
-import React from "react";
+import React, { useMemo } from "react";
 import ButtonComponent from "../CommonComponent/ButtonComponent";
 import Image from "next/image";
 import { useAppSelector } from "@/store/useStoreHook";
@@ -9,13 +9,24 @@ type Props = {
   onPressLoadMore: () => void;
   countryList: any[];
   isLoading: boolean;
+  filterCountry: string;
 };
 
 const CountryList = (props: Props) => {
-  const { isLoading, countryList, onPressLoadMore } = props;
+  const { isLoading, countryList, onPressLoadMore, filterCountry } = props;
   const { countryData } = useAppSelector((state) => state.homeReducer);
 
-  const isVisibleButton = Boolean(countryData.length === countryList.length);
+  const isVisibleButton = useMemo(() => {
+    if (filterCountry === "all") {
+      return Boolean(countryData.length === countryList.length);
+    }
+
+    const newArray = countryData.filter(
+      (item: any) => item?.region == filterCountry
+    );
+
+    return Boolean(newArray.length === countryList.length);
+  }, [filterCountry, countryData, countryList]);
 
   return (
     <div className="my-5">
