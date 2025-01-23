@@ -7,6 +7,7 @@ import {
   IoIosArrowDropleftCircle,
   IoIosArrowDroprightCircle,
 } from "react-icons/io";
+import { motion, useScroll, useTransform } from "framer-motion";
 
 type Props = {};
 
@@ -45,6 +46,10 @@ const Pagination = (props: PaginationType) => {
 
 const Carousels = (props: Props) => {
   const [currentIndex, setCurrentIndex] = useState(0);
+  const { scrollY } = useScroll();
+  const x = useTransform(scrollY, [0, 800], [0, 300]);
+  const x2 = useTransform(scrollY, [0, 800], [0, -700]);
+  const opacity = useTransform(scrollY, [0, 800], [1, 0]);
 
   const goToPrev = () => {
     if (currentIndex != 0) {
@@ -60,14 +65,20 @@ const Carousels = (props: Props) => {
 
   return (
     <div className="h-[60%]  lg:gap-5 gap-3 flex flex-col lg:mt-10 mt-10 lg:flex-row-reverse">
-      <div className="h-[40%] lg:w-1/4 lg:h-full ">
+      <motion.div
+        style={{ x, opacity }}
+        className="h-[40%] lg:w-1/4 lg:h-full "
+      >
         <img
           src={"/images/img7.jpg"}
           alt="first image"
           className="w-full h-full object-cover "
         />
-      </div>
-      <div className="h-[60%]  lg:w-3/4 lg:h-full relative">
+      </motion.div>
+      <motion.div
+        style={{ x: x2, opacity }}
+        className="h-[60%]  lg:w-3/4 lg:h-full relative"
+      >
         <Carousel
           slide={false}
           controls={false}
@@ -90,7 +101,7 @@ const Carousels = (props: Props) => {
           goToNext={goToNext}
           currentIndex={currentIndex}
         />
-      </div>
+      </motion.div>
     </div>
   );
 };

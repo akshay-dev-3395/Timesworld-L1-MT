@@ -1,6 +1,7 @@
 "use client";
 import React, { useState } from "react";
 import { IoReorderThree, IoCloseCircle } from "react-icons/io5";
+import { motion } from "framer-motion";
 
 type Props = {
   onPressNavLink: (name: string) => void;
@@ -24,9 +25,24 @@ const NavBarSection = (props: Props) => {
 
   return (
     <nav className="relative">
-      <div className="flex flex-1 justify-between items-center">
-        <h2 className="text-black font-bold">Countries</h2>
+      <motion.div
+        whileInView={{ opacity: 1, y: 0 }}
+        initial={{ opacity: 0, y: -50 }}
+        transition={{ duration: 0.5 }}
+        className="flex flex-1 justify-between items-center"
+      >
+        <h2
+          // whileInView={{ opacity: 1, y: 0 }}
+          // initial={{ opacity: 0, y: -50 }}
+          // transition={{ duration: 0.5 }}
+          className="text-black font-bold"
+        >
+          Countries
+        </h2>
         <div
+          // animate={{ opacity: 1, x: 0 }}
+          // initial={{ opacity: 0, x: 100 }}
+          // transition={{ duration: 0.5 }}
           className="block lg:hidden sm:hidden md:hidden"
           onClick={handleClick}
         >
@@ -36,7 +52,12 @@ const NavBarSection = (props: Props) => {
             <IoReorderThree className="h-14 w-14" />
           )}
         </div>
-        <div className="lg:flex md:flex sm:flex flex-row gap-4 hidden">
+        <motion.div
+          animate={{ opacity: 1, x: 0 }}
+          initial={{ opacity: 0, x: 100 }}
+          transition={{ duration: 0.5 }}
+          className="lg:flex md:flex sm:flex flex-row gap-4 hidden"
+        >
           <h5
             onClick={() => onPressNavLink("all")}
             className=" text-lg decoration-2 decoration-black cursor-pointer"
@@ -67,8 +88,8 @@ const NavBarSection = (props: Props) => {
           >
             Europe
           </h5>
-        </div>
-      </div>
+        </motion.div>
+      </motion.div>
       {isClickIcon && (
         <div className="bg-slate-900 px-4 py-6 flex flex-col gap-3 absolute z-10 w-full">
           <h5

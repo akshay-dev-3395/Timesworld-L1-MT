@@ -6,6 +6,8 @@ import Image from "next/image";
 import { useAppSelector } from "@/store/useStoreHook";
 import Placeholder from "react-bootstrap/Placeholder";
 import Card from "react-bootstrap/Card";
+import { motion } from "framer-motion";
+import { div } from "framer-motion/client";
 
 type Props = {
   onPressLoadMore: () => void;
@@ -37,22 +39,26 @@ const CountryList = (props: Props) => {
           {Array(10)
             .fill(5)
             .map((_, index) => (
-              <Card
+              <motion.div
                 key={`image-${index}`}
-                className="flex flex-row items-center border-2 rounded p-2 bg-white shadow-sm mb-2 h-24"
+                animate={{ opacity: 1, y: 0 }}
+                initial={{ opacity: 0, y: -50 }}
+                transition={{ duration: 0.5 }}
               >
-                <div className="h-16 w-16 rounded bg-gray-300"></div>
-                <Card.Body>
-                  <Placeholder
-                    animation="glow"
-                    bg="light"
-                    className="flex flex-col gap-1"
-                  >
-                    <Placeholder xs={7} />
-                    <Placeholder xs={3} />
-                  </Placeholder>
-                </Card.Body>
-              </Card>
+                <Card className="flex flex-row items-center border-2 rounded p-2 bg-white shadow-sm mb-2 h-24 ">
+                  <div className="h-16 w-16 rounded bg-gray-300"></div>
+                  <Card.Body>
+                    <Placeholder
+                      animation="glow"
+                      bg="light"
+                      className="flex flex-col gap-1"
+                    >
+                      <Placeholder xs={7} />
+                      <Placeholder xs={3} />
+                    </Placeholder>
+                  </Card.Body>
+                </Card>
+              </motion.div>
             ))}
         </div>
       </div>
@@ -63,9 +69,12 @@ const CountryList = (props: Props) => {
     <div className="my-5">
       <div className="grid grid-cols-1 lg:grid-cols-2 gap-2">
         {countryList.map((item, index) => (
-          <div
+          <motion.div
+            animate={{ opacity: 1, y: 0 }}
+            initial={{ opacity: 0, y: -50 }}
+            transition={{ duration: 0.5 }}
             key={`image-${index}`}
-            className="flex flex-row items-center border-2 rounded p-2 bg-white shadow-sm mb-2"
+            className="flex flex-row items-center border-2 rounded p-2 bg-white shadow-sm mb-2 cursor-pointer"
           >
             <Image
               src={item?.flag}
@@ -78,7 +87,7 @@ const CountryList = (props: Props) => {
               <h4 className="m-0 text-black">{item?.name}</h4>
               <p className="text-gray-500">{item?.region}</p>
             </div>
-          </div>
+          </motion.div>
         ))}
       </div>
       {!isVisibleButton && (
